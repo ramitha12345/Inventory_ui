@@ -61,11 +61,11 @@ export default {
   methods: {
     async onLogin() {
       try {
-        await this.$http.post("/auth", {
+        await this.$http.post("/auth/login", {
           email: this.email,
           password: this.password,
         });
-        console.log("User created successfully!");
+        console.log("User login successfully!");
       } catch (error) {
         console.log(error)
         console.log("fxgduccessfully!");
