@@ -43,42 +43,51 @@ const routes = [
   {
     path: '/category',
     component: createCategory,
+    meta: { permissions: ['admin', 'manager'],},
   },
   {
     path: '/categoryList',
     component: categoryList,
+    meta: { permissions: ['admin', 'manager'],},
   },
   //customer
   {
     path: '/customer',
     component: createCustomer,
+    meta: { permissions: ['admin', 'manager'],},
   },
   {
     path: '/customerList',
     component: customerList,
+    meta: { permissions: ['admin', 'manager'],},
   },
   //product
   {
     path: '/product',
     component: createProduct,
+    meta: { permissions: ['admin', 'manager'],},
   },
   {
     path: '/productList',
     component: productList,
+    meta: { permissions: ['admin', 'manager'],},
   },
   //user
   {
     path: '/user',
     component: createUser,
+    meta: { permissions: ['admin', 'manager'],},
   },
   {
     path: '/userList',
     component: userList,
+    meta: { permissions: ['admin', 'manager'],},
   },
   //report
   {
     path: '/report',
     component: reorderLevelReport,
+    meta: { permissions: ['admin', 'manager'],},
   },
 ]
 
@@ -86,6 +95,28 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+import store from '../store';
+
+router.beforeEach((to, from, next) => {
+  
+  if (to.matched.some(record => record.meta.permissions)) {
+    //protected route
+    if (store.state['token']) {
+      if (to.meta.permissions.includes(store.state['role'])) {
+        next()
+      } else {
+        store.dispatch('onLogout')
+        next('/')
+      }
+    } else {
+      store.dispatch('onLogout')
+      next('/');
+    }
+  } else {
+    next();
+  }
 })
 
 export default router

@@ -10,7 +10,7 @@
           </v-card-title>
           <v-card-text>
             <v-row>
-              <v-col v-col cols="12" md="3">
+              <v-col cols="12" md="3">
                 <v-text-field
                   label="First Name"
                   outlined
@@ -20,7 +20,7 @@
                   @input="$v.firstName.$touch()"
                 ></v-text-field>
               </v-col>
-              <v-col v-col cols="12" md="3">
+              <v-col cols="12" md="3">
                 <v-text-field
                   label="Last Name"
                   outlined
@@ -30,7 +30,7 @@
                   @input="$v.lastName.$touch()"
                 ></v-text-field>
               </v-col>
-              <v-col v-col cols="12" md="3">
+              <v-col cols="12" md="3">
                 <v-radio-group
                   v-model="gender"
                   row
@@ -43,7 +43,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col v-col cols="12" md="3">
+              <v-col cols="12" md="3">
                 <v-text-field
                   label="Email"
                   outlined
@@ -52,7 +52,7 @@
                   @blur="$v.email.$touch()"
                 ></v-text-field>
               </v-col>
-              <v-col v-col cols="12" md="3">
+              <v-col cols="12" md="3">
                 <v-text-field
                   label="NIC"
                   outlined
@@ -61,7 +61,7 @@
                   @blur="$v.nic.$touch()"
                 ></v-text-field>
               </v-col>
-              <v-col v-col cols="12" md="3">
+              <v-col cols="12" md="3">
                 <v-text-field
                   label="Role"
                   outlined
@@ -71,7 +71,7 @@
                   @input="$v.role.$touch()"
                 ></v-text-field>
               </v-col>
-              <v-col v-col cols="12" md="3">
+              <v-col cols="12" md="3">
                 <v-text-field
                   type="password"
                   label="Password"
@@ -207,7 +207,7 @@ export default {
   methods: {
     async POST() {
       try {
-        await this.$http.post("/user", {
+        await this.$http.post("/auth/register", {
           firstName: this.firstName,
           lastName: this.lastName,
           gender: this.gender,
