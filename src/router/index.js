@@ -43,15 +43,18 @@ const routes = [
   {
     path: '/category',
     component: createCategory,
+    meta: { permissions: ['admin', 'manager'],},
   },
   {
     path: '/categoryList',
     component: categoryList,
+    meta: { permissions: ['admin', 'manager'],},
   },
   //customer
   {
     path: '/customer',
     component: createCustomer,
+    meta: { permissions: ['admin', 'manager','staff'],},
   },
   {
     path: '/customerList',
@@ -70,6 +73,7 @@ const routes = [
   {
     path: '/user',
     component: createUser,
+    meta: { permissions: ['admin'],},
   },
   {
     path: '/userList',
@@ -79,6 +83,7 @@ const routes = [
   {
     path: '/report',
     component: reorderLevelReport,
+    meta: { permissions: ['admin', 'manager'],},
   },
 ]
 
@@ -86,6 +91,28 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+import store from '../store';
+
+router.beforeEach((to, from, next) => {
+  
+  if (to.matched.some(record => record.meta.permissions)) {
+    // protected route
+    if (store.state['token']) {
+      if (to.meta.permissions.includes(store.state['role'])) {
+        next()
+      } else {
+        store.dispatch('logout')
+        next('/')
+      }
+    } else {
+      store.dispatch('logout')
+      next('/');
+    }
+  } else {
+    next();
+  }
 })
 
 export default router

@@ -5,6 +5,7 @@ import store from './store'
 import vuetify from './plugins/vuetify';
 import axios from 'axios';
 import Vuelidate from 'vuelidate';
+import Cookies from 'js-cookie';
 // import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 // @NgModule({
@@ -19,7 +20,7 @@ import Vuelidate from 'vuelidate';
 
 Vue.prototype.$http = axios;
 axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
-
+axios.defaults.headers.common.Authorization = Cookies.get('token');
 Vue.config.productionTip = false
 Vue.use(Vuelidate);
 new Vue({
