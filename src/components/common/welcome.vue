@@ -30,8 +30,7 @@
 
 <script>
 import { required, email } from "vuelidate/lib/validators";
-import { mapActions} from 'vuex';
-
+import { mapActions } from "vuex";
 export default {
   validations() {
     return {
@@ -61,7 +60,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(["login"]),
     async onLogin() {
       try {
         const data = await this.$http.post("/auth/login", {
@@ -69,10 +68,9 @@ export default {
           password: this.password,
         });
         await this.login(data.data);
-        this.$router.replace('/customerList')
+        this.$router.replace("/customerLogin");
       } catch (error) {
-        console.log(error)
-        console.log("fxgduccessfully!");
+        console.log(error);
       }
     },
   },

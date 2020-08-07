@@ -54,30 +54,34 @@ const routes = [
   {
     path: '/customer',
     component: createCustomer,
-    meta: { permissions: ['admin', 'manager','staff'],},
+    meta: { permissions: ['admin', 'manager'],},
   },
   {
     path: '/customerList',
     component: customerList,
+    meta: { permissions: ['admin', 'manager'],},
   },
   //product
   {
     path: '/product',
     component: createProduct,
+    meta: { permissions: ['admin', 'manager'],},
   },
   {
     path: '/productList',
     component: productList,
+    meta: { permissions: ['admin', 'manager'],},
   },
   //user
   {
     path: '/user',
     component: createUser,
-    meta: { permissions: ['admin'],},
+    meta: { permissions: ['admin', 'manager'],},
   },
   {
     path: '/userList',
     component: userList,
+    meta: { permissions: ['admin', 'manager'],},
   },
   //report
   {
@@ -98,16 +102,16 @@ import store from '../store';
 router.beforeEach((to, from, next) => {
   
   if (to.matched.some(record => record.meta.permissions)) {
-    // protected route
+    //protected route
     if (store.state['token']) {
       if (to.meta.permissions.includes(store.state['role'])) {
         next()
       } else {
-        store.dispatch('logout')
+        store.dispatch('onLogout')
         next('/')
       }
     } else {
-      store.dispatch('logout')
+      store.dispatch('onLogout')
       next('/');
     }
   } else {
