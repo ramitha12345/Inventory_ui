@@ -50,7 +50,7 @@
       <!-- <v-chip v-if="token" class="ml-1 white--text" color="#1E90FF">{{name}}</v-chip>-->
       <v-spacer ></v-spacer>
 
-      <v-btn v-if="token" @click="logout()" class="success">logout</v-btn>
+      <v-btn v-if="token" @click="onLogout()" class="success">logout</v-btn>
     </v-app-bar>
     <v-content>
       <v-container fluid grid-list-sm>
@@ -63,8 +63,8 @@
 <script>
 import { mapState, mapActions } from "vuex";
 export default {
-  computed:{
-    ...mapState(['token'])
+  computed: {
+    ...mapState(["token"]),
   },
   name: "App",
 
@@ -73,6 +73,7 @@ export default {
   data: () => ({
     projectName: "Ramitha Inventory",
     drawer: true,
+
     permissions: [
       {
         text: "Create User",
@@ -121,13 +122,13 @@ export default {
       },
     ],
   }),
-  methods:{
-    ...mapActions(["onLogout"]),
-    async logout(){
-      this.onLogout();
+  methods: {
+    ...mapActions(["logout"]),
+    async onLogout(){
+      this.logout();
       this.$router.replace('/')
     }
-  }
+  },
 };
 </script>
 <style>
