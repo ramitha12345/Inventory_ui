@@ -43,51 +43,51 @@ const routes = [
   {
     path: '/category',
     component: createCategory,
-    meta: { permissions: ['admin', 'manager'],},
+    meta: { permissions: ['Admin', 'Manager'], },
   },
   {
     path: '/categoryList',
     component: categoryList,
-    meta: { permissions: ['admin', 'manager'],},
+    meta: { permissions: ['Admin', 'Manager'], },
   },
   //customer
   {
     path: '/customer',
     component: createCustomer,
-    meta: { permissions: ['admin', 'manager'],},
+    meta: { permissions: ['Admin', 'Manager'], },
   },
   {
     path: '/customerList',
     component: customerList,
-    meta: { permissions: ['admin', 'manager'],},
+    meta: { permissions: ['Admin', 'Manager'], },
   },
   //product
   {
     path: '/product',
     component: createProduct,
-    meta: { permissions: ['admin', 'manager'],},
+    meta: { permissions: ['Admin', 'Manager'], },
   },
   {
     path: '/productList',
     component: productList,
-    meta: { permissions: ['admin', 'manager'],},
+    meta: { permissions: ['Admin', 'Manager'], },
   },
   //user
   {
     path: '/user',
     component: createUser,
-    meta: { permissions: ['admin', 'manager'],},
+    meta: { permissions: ['Admin'], },
   },
   {
     path: '/userList',
     component: userList,
-    meta: { permissions: ['admin', 'manager'],},
+    meta: { permissions: ['Admin'], },
   },
   //report
   {
     path: '/report',
     component: reorderLevelReport,
-    meta: { permissions: ['admin', 'manager'],},
+    meta: { permissions: ['Admin'], },
   },
 ]
 
@@ -100,7 +100,7 @@ const router = new VueRouter({
 import store from '../store';
 
 router.beforeEach((to, from, next) => {
-  
+
   if (to.matched.some(record => record.meta.permissions)) {
     //protected route
     if (store.state['token']) {

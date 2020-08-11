@@ -62,14 +62,22 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="3">
-                <v-text-field
+                <v-select
+                  :items="roles"
+                  outlined
+                  v-model="role"
+                  label="Role"
+                  :error-messages="roleErrors"
+                  @input="$v.role.$touch()"
+                ></v-select>
+                <!-- <v-text-field
                   label="Role"
                   outlined
                   v-model="role"
                   counter="15"
                   :error-messages="roleErrors"
                   @input="$v.role.$touch()"
-                ></v-text-field>
+                ></v-text-field>-->
               </v-col>
               <v-col cols="12" md="3">
                 <v-text-field
@@ -97,13 +105,7 @@
 </template>
 
 <script>
-import {
-  required,
-  maxLength,
-  alpha,
-  email,
-  alphaNum,
-} from "vuelidate/lib/validators";
+import { required, maxLength, alpha, email } from "vuelidate/lib/validators";
 const nicValidator = (value) => {
   const oldNic = /^[0-9]{9}[vVxX]$/;
   const newNic = /^[0-9]{12}$/;
@@ -117,7 +119,7 @@ export default {
       gender: { required },
       email: { required, email },
       nic: { nicValidator },
-      role: { required, maxLength: maxLength(15), alphaNum },
+      role: { required },
       password: { required },
     };
   },
@@ -168,10 +170,6 @@ export default {
       const errors = [];
       if (!this.$v.role.$dirty) return errors;
       if (!this.$v.role.required) errors.push("Role is required.");
-      if (!this.$v.role.maxLength)
-        errors.push("Maximum length for the Role is 15");
-      if (!this.$v.role.alphaNum)
-        errors.push("Role should alpha numeric characters");
       return errors;
     },
     passwordErrors() {
@@ -196,7 +194,8 @@ export default {
       gender: true,
       email: "",
       nic: "",
-      role: "",
+      role: "Admin",
+      roles: ["Admin", "Manager", "Staff"],
       password: "",
       isCreateComponent: true,
       alertType: "error",

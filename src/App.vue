@@ -44,7 +44,7 @@
     </v-navigation-drawer>
     <v-app-bar app class="primary">
       <v-app-bar-nav-icon @click="drawer = !drawer" v-if="token" dark></v-app-bar-nav-icon>
-      <v-icon dark large class="mr-3">fa-bolt</v-icon>
+      <v-icon dark large class="mr-3">fa-box-open</v-icon>
 
       <v-toolbar-title class="white--text">{{projectName}}</v-toolbar-title>
       <!-- <v-chip v-if="token" class="ml-1 white--text" color="#1E90FF">{{name}}</v-chip>-->

@@ -4,8 +4,28 @@
       <v-card>
         <v-card-title>Reorder Level Report</v-card-title>
         <v-card-text>
-          <v-select :items="orderBys" outlined v-model="order" label="Order By"></v-select>
-          <v-data-table :items="items" :headers="headers"></v-data-table>
+          <v-row>
+            <v-col cols="6">
+              <v-select
+                :items="orderBys"
+                outlined
+                v-model="order"
+                item-text="name"
+                item-value="value"
+                label="Order By"
+              ></v-select>
+            </v-col>
+            <v-col cols="6">
+              <v-select
+                :items="statusList"
+                outlined
+                v-model="status"
+                item-text="name"
+                item-value="value"
+                label="Status"
+              ></v-select>
+            </v-col>
+          </v-row>
         </v-card-text>
       </v-card>
       <JsonExcel
@@ -25,20 +45,8 @@ export default {
   components: {
     JsonExcel,
   },
-  mounted() {
-    this.POST();
-  },
   data() {
     return {
-      items: [],
-      headers: [
-        { text: "Id", value: "id" },
-        { text: "Name", value: "name" },
-        { text: "Quantity", value: "qty" },
-        { text: "Price", value: "price" },
-        { text: "Reorder Level", value: "reorderLevel" },
-        { text: "Size", value: "size" },
-      ],
       json_fields: {
         Id: "id",
         Name: "name",
@@ -49,14 +57,26 @@ export default {
         CreatedAt: "createdAt",
       },
       order: "",
-      orderBys: ["id", "Name", "Quantity", "Reorder Level"],
+      orderBys: [
+        { name: "Id", value: "id" },
+        { name: "Id Desending", value: "id DESC" },
+        { name: "Name", value: "name" },
+        { name: "Name Desending", value: "name DESC" },
+      ],
+      status:"",
+      statusList: [
+        { name: "Active", value: true },
+        { name: "Inactive", value: false },
+        { name: "All", value: "all" },
+      ],
     };
   },
   methods: {
     async POST() {
       try {
-        const data = await this.$http.post("/report", {
-          orderBy: "id",
+        const data = await this.$http.post("/report/reorderLevel", {
+          orderBy:this.order,
+          status:this.status
         });
         this.items = data.data;
         return data.data;
@@ -64,34 +84,6 @@ export default {
         alert("error");
       }
     },
-    // async GET(id) {
-    //   try {
-    //     const data = await this.$http.get(`/product/${id}`);
-    //     this.name = data.data.name;
-    //     this.price = data.data.price;
-    //     this.qty = data.data.qty;
-    //     this.reorderLevel = data.data.reorderLevel;
-    //     this.size = data.data.size;
-    //     this.isImported = data.data.isImported;
-    //     console.log(data.data);
-    //   } catch (error) {
-    //     alert("error");
-    //   }
-    // },
-    // async PUT() {
-    //   try {
-    //     await this.$http.post(`/product/${this.id}`, {
-    //       name: this.name,
-    //       price: this.price,
-    //       qty: this.qty,
-    //       reorderLevel: this.reorderLevel,
-    //       size: this.size,
-    //       isImported: this.isImported,
-    //     });
-    //   } catch (error) {
-    //     alert("error");
-    //   }
-    // },
   },
 };
 </script>

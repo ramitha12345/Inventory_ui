@@ -25,6 +25,9 @@
         </v-card-actions>
       </v-card>
     </v-col>
+    <v-col cols="12" md="12">
+      <v-alert v-model="hasAlert" dismissible :type="alertType">{{alert}}</v-alert>
+    </v-col>
   </v-row>
 </template>
 
@@ -57,6 +60,9 @@ export default {
     return {
       email: "",
       password: "",
+      alertType: "error",
+      hasAlert: false,
+      alert: "",
     };
   },
   methods: {
@@ -70,7 +76,9 @@ export default {
         await this.login(data.data);
         this.$router.replace("/customerLogin");
       } catch (error) {
-        console.log(error);
+        this.alert = "User login fail!";
+        this.alertType = "error";
+        this.hasAlert = true;
       }
     },
   },
