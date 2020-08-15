@@ -9,6 +9,10 @@ import categoryList from '../components/category/categoryList.vue'
 import createCustomer from '../components/customer/createCustomer.vue'
 import customerList from '../components/customer/customerList.vue'
 
+//supplier
+import createSupplier from '../components/supplier/createSupplier.vue'
+import supplierList from '../components/supplier/supplierList.vue'
+
 //product
 import createProduct from '../components/product/createProduct.vue'
 import productList from '../components/product/productList.vue'
@@ -22,6 +26,9 @@ import welcome from '../components/common/welcome.vue'
 
 //report
 import reorderLevelReport from '../components/report/reorderLevelReport.vue'
+
+//grn
+import createGrn from '../components/grn/createGrn.vue'
 
 Vue.use(VueRouter)
 
@@ -61,6 +68,17 @@ const routes = [
     component: customerList,
     meta: { permissions: ['Admin', 'Manager'], },
   },
+  //supplier
+  {
+    path: '/supplier',
+    component: createSupplier,
+    meta: { permissions: ['Admin', 'Manager'], },
+  },
+  {
+    path: '/supplierList',
+    component: supplierList,
+    meta: { permissions: ['Admin', 'Manager'], },
+  },
   //product
   {
     path: '/product',
@@ -88,6 +106,12 @@ const routes = [
     path: '/report',
     component: reorderLevelReport,
     meta: { permissions: ['Admin'], },
+  },
+  //grn
+  {
+    path: '/grn',
+    component: createGrn,
+    meta: { permissions: ['Admin', 'Manager', 'Staff'], },
   },
 ]
 

@@ -2,7 +2,7 @@
   <v-row>
     <v-col>
       <v-card>
-        <v-card-title>Customer List</v-card-title>
+        <v-card-title>Supplier List</v-card-title>
         <v-card-text>
           <v-text-field label="Search" outlined v-model="search"></v-text-field>
           <v-data-table :items="items" :headers="headers" :search="search">
@@ -50,7 +50,7 @@ export default {
   methods: {
     async GET() {
       try {
-        const data = await this.$http.get("/customer/cus");
+        const data = await this.$http.get("/customer/sup");
         this.items = data.data;
       } catch (error) {
         alert("error");

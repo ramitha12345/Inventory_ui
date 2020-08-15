@@ -48,7 +48,7 @@
 
       <v-toolbar-title class="white--text">{{projectName}}</v-toolbar-title>
       <!-- <v-chip v-if="token" class="ml-1 white--text" color="#1E90FF">{{name}}</v-chip>-->
-      <v-spacer ></v-spacer>
+      <v-spacer></v-spacer>
 
       <v-btn v-if="token" @click="onLogout()" class="success">logout</v-btn>
     </v-app-bar>
@@ -86,6 +86,16 @@ export default {
         icon: "fa-",
       },
       {
+        text: "Create Supplier",
+        path: "/supplier",
+        icon: "fa-",
+      },
+      {
+        text: "Supplier List",
+        path: "/supplierList",
+        icon: "fa-",
+      },
+      {
         text: "Create Customer",
         path: "/customer",
         icon: "fa-",
@@ -120,14 +130,19 @@ export default {
         path: "/report",
         icon: "fa-",
       },
+      {
+        text: "Create GRN",
+        path: "/grn",
+        icon: "fa-",
+      },
     ],
   }),
   methods: {
     ...mapActions(["logout"]),
-    async onLogout(){
+    async onLogout() {
       this.logout();
-      this.$router.replace('/')
-    }
+      this.$router.replace("/");
+    },
   },
 };
 </script>

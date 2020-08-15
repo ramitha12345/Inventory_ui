@@ -30,7 +30,7 @@ export default new Vuex.Store({
         try {
           axios.defaults.headers.common.Authorization =
             "Bearer" + " " + payload.token;
-          Cookies.set("token", payload.token);
+          Cookies.set("token", "Bearer" + " " + payload.token);
           commit("setLogin", payload);
           resolve("done");
         } catch (error) {

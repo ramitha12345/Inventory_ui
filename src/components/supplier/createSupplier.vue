@@ -1,11 +1,11 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <v-form ref="customerForm">
+      <v-form ref="supplierForm">
         <v-card>
           <v-card-title>
             {{
-            `${isCreateComponent ? "Create Customer" : "Update Customer"}`
+            `${isCreateComponent ? "Create Supplier" : "Update Supplier"}`
             }}
           </v-card-title>
           <v-card-text>
@@ -187,15 +187,15 @@ export default {
           email: this.email,
           contactNumber: this.contactNumber,
           address: this.address,
-          isSupplier:false
+          isSupplier:true
         });
-        this.$refs.customerForm.reset();
+        this.$refs.supplierForm.reset();
         this.$v.$reset();
         this.alertType = "success";
-        this.alert = "Customer created successfully!";
+        this.alert = "Supplier created successfully!";
         this.hasAlert = true;
       } catch (error) {
-        this.alert = "Customer creation fail!";
+        this.alert = "Supplier creation fail!";
         this.alertType = "error";
         this.hasAlert = true;
       }
