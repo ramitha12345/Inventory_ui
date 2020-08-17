@@ -38,7 +38,7 @@ export default new Vuex.Store({
         }
       });
     },
-    onLogout({ commit }) {
+    logout({ commit }) {
       return new Promise((resolve, reject) => {
         try {
           axios.defaults.headers.common.Authorization = null;

@@ -3,11 +3,7 @@
     <v-col cols="12">
       <v-form ref="grnForm">
         <v-card>
-          <v-card-title>
-            {{
-            `${isCreateComponent ? "Create Product" : "Update Product"}`
-            }}
-          </v-card-title>
+          <v-card-title>Create GRN</v-card-title>
           <v-card-text>
             <v-row>
               <v-col cols="12">
@@ -18,7 +14,7 @@
                   v-model="supplierId"
                   label="Select a supplier"
                   outlined
-                  :error-messages="nameErrors"
+                  :error-messages="supplierIdErrors"
                   @input="$v.supplierId.$touch()"
                 ></v-autocomplete>
               </v-col>
@@ -30,7 +26,7 @@
                   v-model="productId"
                   label="Select a product"
                   outlined
-                  :error-messages="nameErrors"
+                  :error-messages="productIdErrors"
                   @input="$v.productId.$touch()"
                 ></v-autocomplete>
               </v-col>
@@ -64,8 +60,15 @@
               >Add</v-btn>
             </v-col>
             <v-col cols="12">
-              <v-data-table :items="productsList" :headers="headers"></v-data-table>
+              <v-data-table :items="productsList" :headers="headers">
+                <template v-slot:item.remove="{ item }">
+                  <v-btn @click="onRemove(item.item_id)" class="error">
+                    <v-icon>fa-trash</v-icon>
+                  </v-btn>
+                </template>
+              </v-data-table>
             </v-col>
+            <h1>{{total}} LKR</h1>
           </v-card-text>
           <v-card-actions>
             <v-btn class="success" @click="POST()" :disabled="isDisable">Create</v-btn>
@@ -124,6 +127,15 @@ export default {
         return true;
       }
     },
+    total() {
+      if (this.productsList.length) {
+        return this.productsList
+          .map((e) => Number(e.price) * Number(e.qty))
+          .reduce((a, b) => a + b);
+      } else {
+        return 0;
+      }
+    },
   },
   mounted() {
     this.GET();
@@ -145,14 +157,22 @@ export default {
         {
           text: "Name",
           value: "name",
+          align: "center",
         },
         {
           text: "Qty",
           value: "qty",
+          align: "center",
         },
         {
           text: "Price",
           value: "price",
+          align: "center",
+        },
+        {
+          text: "Remove",
+          value: "remove",
+          align: "center",
         },
       ],
     };
@@ -193,7 +213,7 @@ export default {
     addToList(price, qty, productId) {
       //check already in the list
       const isInList = this.productsList.find(
-        (e) => Number(e.productId) === Number(e.productId)
+        (e) => Number(e.productId) === Number(productId)
       );
       if (isInList) {
         alert("This item already in the list");
@@ -207,6 +227,12 @@ export default {
         qty,
         productId,
       });
+    },
+    onRemove(productId) {
+      const index = this.productsList.findIndex(
+        (e) => Number(e.productId) === Number(productId)
+      );
+      this.productsList.splice(index, 1);
     },
   },
 };

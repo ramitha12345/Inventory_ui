@@ -21,12 +21,12 @@
               v-for="(child, i) in item.children"
               :key="i"
               @click="$router.push(child.path)"
-              color="red"
+              color="blue"
             >
               <v-list-item-action v-if="child.icon">
                 <v-icon>{{ child.icon }}</v-icon>
               </v-list-item-action>
-              <v-list-item-content :style="child.path === $route.path ? 'color:red;' : ''">
+              <v-list-item-content :style="child.path === $route.path ? 'color:blue;' : ''">
                 <v-list-item-title>{{ child.text }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -52,19 +52,27 @@
 
       <v-btn v-if="token" @click="onLogout()" class="success">logout</v-btn>
     </v-app-bar>
-    <v-content>
+    <v-main>
       <v-container fluid grid-list-sm>
         <router-view></router-view>
       </v-container>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
+import {Admin} from './permissions'
 export default {
   computed: {
-    ...mapState(["token"]),
+    ...mapState(["token","role"]),
+    permissions(){
+      if (this.role==='Admin') {
+        return Admin
+      } else {
+        return Admin
+      }
+    }
   },
   name: "App",
 
@@ -74,68 +82,7 @@ export default {
     projectName: "Ramitha Inventory",
     drawer: true,
 
-    permissions: [
-      {
-        text: "Create User",
-        path: "/user",
-        icon: "fa-",
-      },
-      {
-        text: "User list",
-        path: "/userList",
-        icon: "fa-",
-      },
-      {
-        text: "Create Supplier",
-        path: "/supplier",
-        icon: "fa-",
-      },
-      {
-        text: "Supplier List",
-        path: "/supplierList",
-        icon: "fa-",
-      },
-      {
-        text: "Create Customer",
-        path: "/customer",
-        icon: "fa-",
-      },
-      {
-        text: "Customer List",
-        path: "/customerList",
-        icon: "fa-",
-      },
-      {
-        text: "Create Category",
-        path: "/category",
-        icon: "fa-",
-      },
-      {
-        text: "Category List",
-        path: "/categoryList",
-        icon: "fa-",
-      },
-      {
-        text: "Create Product",
-        path: "/product",
-        icon: "fa-",
-      },
-      {
-        text: "Product List",
-        path: "/productList",
-        icon: "fa-",
-      },
-      {
-        text: "Reorder Level Report",
-        path: "/report",
-        icon: "fa-",
-      },
-      {
-        text: "Create GRN",
-        path: "/grn",
-        icon: "fa-",
-      },
-    ],
+    // permissions: [],
   }),
   methods: {
     ...mapActions(["logout"]),
