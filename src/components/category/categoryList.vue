@@ -38,9 +38,9 @@ export default {
         { text: "Id", value: "id" },
         { text: "Name", value: "name" },
         { text: "Description", value: "description" },
-        { text: "Update", value: "update" },
-        { text: "Change Status", value: "changestatus" }
-      ]
+        { text: "Update", value: "update", sortable: false },
+        { text: "Change Status", value: "changestatus", sortable: false },
+      ],
     };
   },
   methods: {
@@ -67,7 +67,7 @@ export default {
       } catch (error) {
         alert("error");
       }
-    }
-  }
+    },
+  },
 };
 </script>

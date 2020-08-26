@@ -55,9 +55,59 @@ export const Admin = [
     {
         icon: "fa-angle-up",
         "icon-alt": "fa-angle-down",
-        text: "GRN",
+        text: "Good Received Note",
         children: [
             { text: "Create GRN", path: "/grn" },
+            { text: "View GRNs", path: "/grnList" },
+        ],
+    },
+]
+export const Manager = [
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
+        text: "Customer",
+        children: [
+            { text: "Create a Customer", path: "/customer" },
+            { text: "View and update Customers", path: "/customerList" },
+        ],
+    },
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
+        text: "Category",
+        children: [
+            { text: "Create a Category", path: "/category" },
+            { text: "View and update Categories", path: "/categoryList" },
+        ],
+    },
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
+        text: "Product",
+        children: [
+            { text: "Create a Product", path: "/product" },
+            { text: "View and update Products", path: "/productList" },
+        ],
+    },
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
+        text: "Good Received Note",
+        children: [
+            { text: "Create GRN", path: "/grn" },
+            { text: "View GRNs", path: "/grnList" },
+        ],
+    },
+]
+export const Staff = [
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
+        text: "Good Received Note",
+        children: [
+            { text: "Create GRN", path: "/grn" },
+            { text: "View GRNs", path: "/grnList" },
         ],
     },
 ]

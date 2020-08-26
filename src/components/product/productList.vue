@@ -42,9 +42,9 @@ export default {
         { text: "Reorder Level", value: "reorderLevel" },
         { text: "Size", value: "size" },
         { text: "Is Imported", value: "isImported" },
-        { text: "Update", value: "update" },
-        { text: "Change Status", value: "changestatus" }
-      ]
+        { text: "Update", value: "update", sortable: false },
+        { text: "Change Status", value: "changestatus", sortable: false },
+      ],
     };
   },
   methods: {
@@ -71,7 +71,7 @@ export default {
       } catch (error) {
         alert("error");
       }
-    }
-  }
+    },
+  },
 };
 </script>

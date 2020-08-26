@@ -62,17 +62,19 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import {Admin} from './permissions'
+import { Admin, Manager, Staff } from "./permissions";
 export default {
   computed: {
-    ...mapState(["token","role"]),
-    permissions(){
-      if (this.role==='Admin') {
-        return Admin
+    ...mapState(["token", "role"]),
+    permissions() {
+      if (this.role === "Admin") {
+        return Admin;
+      } else if (this.role === "Manager") {
+        return Manager;
       } else {
-        return Admin
+        return Staff;
       }
-    }
+    },
   },
   name: "App",
 
@@ -81,8 +83,6 @@ export default {
   data: () => ({
     projectName: "Ramitha Inventory",
     drawer: true,
-
-    // permissions: [],
   }),
   methods: {
     ...mapActions(["logout"]),

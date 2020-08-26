@@ -29,6 +29,7 @@ import reorderLevelReport from '../components/report/reorderLevelReport.vue'
 
 //grn
 import createGrn from '../components/grn/createGrn.vue'
+import grnList from '../components/grn/grnList.vue'
 
 Vue.use(VueRouter)
 
@@ -111,6 +112,11 @@ const routes = [
   {
     path: '/grn',
     component: createGrn,
+    meta: { permissions: ['Admin', 'Manager', 'Staff'], },
+  },
+  {
+    path: '/grnList',
+    component: grnList,
     meta: { permissions: ['Admin', 'Manager', 'Staff'], },
   },
 ]
