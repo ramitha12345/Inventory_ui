@@ -31,6 +31,9 @@ import reorderLevelReport from '../components/report/reorderLevelReport.vue'
 import createGrn from '../components/grn/createGrn.vue'
 import grnList from '../components/grn/grnList.vue'
 
+//invoice
+import createInvoice from '../components/invoice/createInvoice.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -117,6 +120,12 @@ const routes = [
   {
     path: '/grnList',
     component: grnList,
+    meta: { permissions: ['Admin', 'Manager', 'Staff'], },
+  },
+  //invoice
+  {
+    path: '/invoice',
+    component: createInvoice,
     meta: { permissions: ['Admin', 'Manager', 'Staff'], },
   },
 ]

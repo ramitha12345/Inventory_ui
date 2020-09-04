@@ -70,17 +70,9 @@
                   :error-messages="roleErrors"
                   @input="$v.role.$touch()"
                 ></v-select>
-                <!-- <v-text-field
-                  label="Role"
-                  outlined
-                  v-model="role"
-                  counter="15"
-                  :error-messages="roleErrors"
-                  @input="$v.role.$touch()"
-                ></v-text-field>-->
               </v-col>
               <v-col cols="12" md="3">
-                <v-text-field
+                <v-text-field 
                   type="password"
                   label="Password"
                   outlined

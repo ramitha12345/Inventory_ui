@@ -28,8 +28,8 @@ export default {
       headers: [
         { text: "GRN number", value: "id" },
         { text: "Supplier", value: "fullName" },
-        { text: "Date", value: "createdAt" },
-        { text: "Purchase return status", value: "isReturn" },
+        { text: "Date", value: "createdDate" },
+        { text: "Purchase return status", value: "purchaseReturned" },
         { text: "View", value: "view", sortable: false },
       ],
     };

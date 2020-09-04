@@ -1,21 +1,21 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <v-form ref="grnForm">
+      <v-form ref="invoiceForm">
         <v-card>
-          <v-card-title>Create GRN</v-card-title>
+          <v-card-title>Create Invoice</v-card-title>
           <v-card-text>
             <v-row>
               <v-col cols="12">
                 <v-autocomplete
-                  :items="suppliers"
+                  :items="customers"
                   item-value="id"
                   item-text="fullName"
-                  v-model="supplierId"
-                  label="Select a supplier"
+                  v-model="customerId"
+                  label="Select a customer"
                   outlined
-                  :error-messages="supplierIdErrors"
-                  @input="$v.supplierId.$touch()"
+                  :error-messages="customerIdErrors"
+                  @input="$v.customerId.$touch()"
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12" md="4">
@@ -87,17 +87,17 @@ import { required, decimal, integer } from "vuelidate/lib/validators";
 export default {
   validations() {
     return {
-      supplierId: { required },
+      customerId: { required },
       productId: { required },
       price: { required, decimal },
       qty: { required, integer },
     };
   },
   computed: {
-    supplierIdErrors() {
+    customerIdErrors() {
       const errors = [];
-      if (!this.$v.supplierId.$dirty) return errors;
-      if (!this.$v.supplierId.required) errors.push("Supplier is required.");
+      if (!this.$v.customerId.$dirty) return errors;
+      if (!this.$v.customerId.required) errors.push("Customer is required.");
       return errors;
     },
     productIdErrors() {
@@ -121,7 +121,7 @@ export default {
       return errors;
     },
     isDisable() {
-      if (this.supplierId && this.productsList.length) {
+      if (this.customerId && this.productsList.length) {
         return false;
       } else {
         return true;
@@ -148,8 +148,8 @@ export default {
       alertType: "error",
       hasAlert: false,
       alert: "",
-      suppliers: [],
-      supplierId: "",
+      customers: [],
+      customerId: "",
       products: [],
       productId: "",
       productsList: [],
@@ -180,14 +180,14 @@ export default {
   methods: {
     async POST() {
       try {
-        await this.$http.post("/grn", {
+        await this.$http.post("/invoice", {
           productsList: this.productsList,
-          supplierId: this.supplierId,
+          customerId: this.customerId,
         });
-        // this.$refs.grnForm.reset();
+        // this.$refs.invoiceForm.reset();
         // this.$v.$reset();
         this.alertType = "success";
-        this.alert = "GRN created successfully!";
+        this.alert = "Invoice created successfully!";
         this.hasAlert = true;
       } catch (error) {
         if (error.response.status === 422) {
@@ -202,8 +202,8 @@ export default {
 
     async GET() {
       try {
-        const data = await this.$http.get(`grn/util`);
-        this.suppliers = data.data.suppliers;
+        const data = await this.$http.get(`invoice/util`);
+        this.customers = data.data.customers;
         this.products = data.data.products;
       } catch (error) {
         alert("error");

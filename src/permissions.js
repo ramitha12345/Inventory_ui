@@ -11,6 +11,24 @@ export const Admin = [
     {
         icon: "fa-angle-up",
         "icon-alt": "fa-angle-down",
+        text: "Category",
+        children: [
+            { text: "Create a Category", path: "/category" },
+            { text: "View and update Categories", path: "/categoryList" },
+        ],
+    },
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
+        text: "Product",
+        children: [
+            { text: "Create a Product", path: "/product" },
+            { text: "View and update Products", path: "/productList" },
+        ],
+    },
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
         text: "Supplier",
         children: [
             { text: "Create a Supplier", path: "/supplier" },
@@ -29,6 +47,35 @@ export const Admin = [
     {
         icon: "fa-angle-up",
         "icon-alt": "fa-angle-down",
+        text: "Good Received Note",
+        children: [
+            { text: "Create GRN", path: "/grn" },
+            { text: "View GRNs", path: "/grnList" },
+        ],
+    },
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
+        text: "Invoice",
+        children: [
+            { text: "Create Invoice", path: "/invoice" },
+            // { text: "View GRNs", path: "/grnList" },
+        ],
+    },
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
+        text: "Report",
+        children: [
+            { text: "Reorder Level Report", path: "/report" },
+        ],
+    },
+]
+export const Manager = [
+
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
         text: "Category",
         children: [
             { text: "Create a Category", path: "/category" },
@@ -44,25 +91,6 @@ export const Admin = [
             { text: "View and update Products", path: "/productList" },
         ],
     },
-    {
-        icon: "fa-angle-up",
-        "icon-alt": "fa-angle-down",
-        text: "Report",
-        children: [
-            { text: "Reorder Level Report", path: "/report" },
-        ],
-    },
-    {
-        icon: "fa-angle-up",
-        "icon-alt": "fa-angle-down",
-        text: "Good Received Note",
-        children: [
-            { text: "Create GRN", path: "/grn" },
-            { text: "View GRNs", path: "/grnList" },
-        ],
-    },
-]
-export const Manager = [
     {
         icon: "fa-angle-up",
         "icon-alt": "fa-angle-down",
@@ -75,28 +103,19 @@ export const Manager = [
     {
         icon: "fa-angle-up",
         "icon-alt": "fa-angle-down",
-        text: "Category",
-        children: [
-            { text: "Create a Category", path: "/category" },
-            { text: "View and update Categories", path: "/categoryList" },
-        ],
-    },
-    {
-        icon: "fa-angle-up",
-        "icon-alt": "fa-angle-down",
-        text: "Product",
-        children: [
-            { text: "Create a Product", path: "/product" },
-            { text: "View and update Products", path: "/productList" },
-        ],
-    },
-    {
-        icon: "fa-angle-up",
-        "icon-alt": "fa-angle-down",
         text: "Good Received Note",
         children: [
             { text: "Create GRN", path: "/grn" },
             { text: "View GRNs", path: "/grnList" },
+        ],
+    },
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
+        text: "Invoice",
+        children: [
+            { text: "Create Invoice", path: "/invoice" },
+            // { text: "View GRNs", path: "/grnList" },
         ],
     },
 ]
@@ -108,6 +127,15 @@ export const Staff = [
         children: [
             { text: "Create GRN", path: "/grn" },
             { text: "View GRNs", path: "/grnList" },
+        ],
+    },
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
+        text: "Invoice",
+        children: [
+            { text: "Create Invoice", path: "/invoice" },
+            // { text: "View GRNs", path: "/grnList" },
         ],
     },
 ]
