@@ -83,13 +83,16 @@
 </template>
 
 <script>
-import { required, decimal, integer } from "vuelidate/lib/validators";
+import { required, integer } from "vuelidate/lib/validators";
+const priceValidation = (value) => {
+  return Number(value) > 30;
+};
 export default {
   validations() {
     return {
       supplierId: { required },
       productId: { required },
-      price: { required, decimal },
+      price: { required, priceValidation },
       qty: { required, integer },
     };
   },
@@ -110,7 +113,8 @@ export default {
       const errors = [];
       if (!this.$v.price.$dirty) return errors;
       if (!this.$v.price.required) errors.push("Price is required.");
-      if (!this.$v.price.decimal) errors.push("Price should be only decimal");
+      if (!this.$v.price.priceValidation)
+        errors.push("Price should be greather than 50 LKR.");
       return errors;
     },
     qtyErrors() {
@@ -223,8 +227,8 @@ export default {
       const name = item.name;
       this.productsList.push({
         name,
-        price,
-        qty,
+        price: Math.abs(price).toFixed(2),
+        qty: Math.abs(qty),
         productId,
       });
     },

@@ -71,8 +71,8 @@
                   @input="$v.role.$touch()"
                 ></v-select>
               </v-col>
-              <v-col cols="12" md="3">
-                <v-text-field 
+              <v-col cols="12" md="3" v-if="isCreateComponent">
+                <v-text-field
                   type="password"
                   label="Password"
                   outlined
@@ -98,6 +98,8 @@
 
 <script>
 import { required, maxLength, alpha, email } from "vuelidate/lib/validators";
+
+const alwaysOK = { OK: () => true };
 const nicValidator = (value) => {
   const oldNic = /^[0-9]{9}[vVxX]$/;
   const newNic = /^[0-9]{12}$/;
@@ -112,7 +114,7 @@ export default {
       email: { required, email },
       nic: { nicValidator },
       role: { required },
-      password: { required },
+      password: this.isCreateComponent ? { required } : alwaysOK,
     };
   },
   computed: {

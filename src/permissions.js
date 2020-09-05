@@ -1,5 +1,15 @@
 export const Admin = [
     {
+        icon: "fa-chart-line",
+        
+        text: "Dashboard",
+        path:'/dashboard'
+        // children: [
+        //     { text: "Create a user", path: "/user" },
+        //     { text: "View and update users", path: "/userList" },
+        // ],
+    },
+    {
         icon: "fa-angle-up",
         "icon-alt": "fa-angle-down",
         text: "User",
