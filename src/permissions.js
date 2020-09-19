@@ -78,6 +78,9 @@ export const Admin = [
         text: "Report",
         children: [
             { text: "Reorder Level Report", path: "/report" },
+            { text: "Category Report", path: "/category-report" },
+
+           
         ],
     },
 ]

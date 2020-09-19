@@ -26,6 +26,7 @@ import welcome from "../components/common/welcome.vue";
 
 //report
 import reorderLevelReport from "../components/report/reorderLevelReport.vue";
+import categoryReport from '../components/report/categoryReport.vue'
 
 //grn
 import createGrn from "../components/grn/createGrn.vue";
@@ -115,6 +116,12 @@ const routes = [
     component: reorderLevelReport,
     meta: { permissions: ["Admin"] },
   },
+  {
+    path: "/category-report",
+    component: categoryReport,
+    meta: { permissions: ["Admin"] },
+  },
+
   //grn
   {
     path: "/grn",
