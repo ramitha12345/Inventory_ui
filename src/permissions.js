@@ -70,6 +70,13 @@ export const Admin = [
             { text: "Reorder Level Report", path: "/report" },
         ],
     },
+    {
+        icon: "fa-chart-line",
+        "icon-alt": "fa-angle-down",
+
+        text: "Dashboard", path: "/dashboard"
+        
+    },
 ]
 export const Manager = [
 

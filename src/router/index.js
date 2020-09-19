@@ -34,6 +34,10 @@ import grnList from '../components/grn/grnList.vue'
 //invoice
 import createInvoice from '../components/invoice/createInvoice.vue'
 
+//dashboard
+import dashboard from '../components/dashboard/dashboard.vue'
+
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -128,6 +132,12 @@ const routes = [
     component: createInvoice,
     meta: { permissions: ['Admin', 'Manager', 'Staff'], },
   },
+//dashboard
+{
+  path: '/dashboard',
+  component: dashboard,
+  meta: { permissions: ['Admin', 'Manager', 'Staff'], },
+},
 ]
 
 const router = new VueRouter({
