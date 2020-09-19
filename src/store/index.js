@@ -13,11 +13,13 @@ export default new Vuex.Store({
   state: {
     token: null,
     role: "",
+    name:''
   },
   mutations: {
     setLogin(state, payload) {
       state.token = payload.token;
       state.role = payload.role;
+      state.name = payload.name
     },
     setLogout(state) {
       state.token = null;
