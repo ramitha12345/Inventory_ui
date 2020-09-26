@@ -28,6 +28,7 @@
                   outlined
                   :error-messages="productIdErrors"
                   @input="$v.productId.$touch()"
+                  @change="onProductChange"
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12" md="4">
@@ -234,6 +235,10 @@ export default {
       );
       this.productsList.splice(index, 1);
     },
+    onProductChange(){
+       const item = this.products.find((e) => e.id === Number(this.productId));
+      this.price = item.price;
+    }
   },
 };
 </script>
