@@ -66,6 +66,15 @@ export const Admin = [
     {
         icon: "fa-angle-up",
         "icon-alt": "fa-angle-down",
+        text: "Purchase return",
+        children: [
+            { text: "Create PR", path: "/pr" },
+            // { text: "View GRNs", path: "/grnList" },
+        ],
+    },
+    {
+        icon: "fa-angle-up",
+        "icon-alt": "fa-angle-down",
         text: "Invoice",
         children: [
             { text: "Create Invoice", path: "/invoice" },

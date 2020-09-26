@@ -38,6 +38,9 @@ import createInvoice from "../components/invoice/createInvoice.vue";
 // dashboard
 import dashboard from "../components/dashboard/dashboard.vue";
 
+//purchase return
+import createPR from '../components/pr/createPR.vue'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -144,6 +147,12 @@ const routes = [
     component: dashboard,
     meta: { permissions: ["Admin", "Manager", "Staff"] },
   },
+  {
+    path: "/pr",
+    component: createPR,
+    meta: { permissions: ["Admin", "Manager", "Staff"] },
+  },
+  
 ];
 
 const router = new VueRouter({
