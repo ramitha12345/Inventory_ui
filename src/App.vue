@@ -81,7 +81,7 @@ export default {
   components: {},
 
   data: () => ({
-    projectName: "Ramitha Inventory",
+    projectName: "Orchid Fashions Inventory",
     drawer: true,
   }),
   methods: {
