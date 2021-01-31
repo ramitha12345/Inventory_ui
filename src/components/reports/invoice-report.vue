@@ -119,14 +119,8 @@ export default {
   methods: {
     async GET() {
       try {
-        const data = await this.$http.get("invoice");
-        data.data.forEach((element) => {
-          const temp = {};
-          temp.value = element.customer.id;
-          temp.text = `${element.customer.first_name} ${element.customer.last_name}`;
-
-          this.customers.push(temp);
-        });
+        const {data} = await this.$http.get("invoice/util-for-report");
+       this.customers = data;
       } catch (error) {
         this.response = "Oops! Something went wrong.";
         this.alertType = "error";
@@ -161,7 +155,7 @@ export default {
             created.text = this.moment(element.createdAt).format("YYYY-MM-DD");
 
             const customer = {};
-            customer.text = `${element.customer.title}. ${element.customer.first_name} ${element.customer.last_name}`;
+            customer.text = `${element.customer.title}. ${element.customer.firstName} ${element.customer.lastName}`;
 
             const temp = [];
             temp.push(invoice_number);
@@ -170,7 +164,7 @@ export default {
             temp.push(customer);
 
             body.push(temp);
-            data.data.data.customer = `${element.customer.title}. ${element.customer.first_name} ${element.customer.last_name}`;
+            data.data.data.customer = element.customer.fullName
           });
           this.generatePDF(body, data.data.data);
         }

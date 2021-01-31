@@ -2,9 +2,7 @@
   <v-layout row wrap>
     <v-flex xs12 sm12 md12>
       <v-card>
-        <v-card-title>
-          Purchase return report
-        </v-card-title>
+        <v-card-title> Purchase return report </v-card-title>
         <v-card-text>
           <v-layout row wrap>
             <v-flex xs12 sm12 md12>
@@ -32,17 +30,13 @@
             </v-flex>
 
             <v-flex xs12 sm12 md6 v-if="!is_all_dates">
-              <v-subheader>
-                From
-              </v-subheader>
+              <v-subheader> From </v-subheader>
               <v-date-picker v-model="from" :max="min_date" :landscape="true">
               </v-date-picker>
             </v-flex>
 
             <v-flex xs12 sm12 md6 v-if="!is_all_dates">
-              <v-subheader>
-                To
-              </v-subheader>
+              <v-subheader> To </v-subheader>
               <v-date-picker v-model="to" :max="min_date" :landscape="true">
               </v-date-picker>
             </v-flex>
@@ -54,9 +48,7 @@
           </v-layout>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="POST" :disabled="$v.$invalid">
-            generate
-          </v-btn>
+          <v-btn @click="POST" :disabled="$v.$invalid"> generate </v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -119,15 +111,17 @@ export default {
   methods: {
     async GET() {
       try {
-        const data = await this.$http.get("pr");
-        data.data.forEach((element) => {
+        const { data } = await this.$http.get("pr/util");
+        data.forEach((element) => {
           const temp = {};
-          temp.value = element.Grn_master.customer.id;
-          temp.text = `${element.Grn_master.customer.first_name} ${element.Grn_master.customer.last_name}`;
+          temp.value = element.grn_master.customer.id;
+          temp.text = element.grn_master.customer.fullName;
 
           this.suppliers.push(temp);
         });
       } catch (error) {
+        console.log(error);
+
         this.response = "Oops! Something went wrong.";
         this.alertType = "error";
         this.isAlert = true;
@@ -143,27 +137,30 @@ export default {
           supplier_id: this.supplier_id,
         };
 
-        const data = await this.$http.post("reports/pr", formData);
+        const { data } = await this.$http.post("reports/pr", formData);
 
-        if (data.data.data2.length === 0) {
+        console.log(data.data2.length)
+
+        if (data.data2.length === 0) {
           this.response =
             "There is no Sales returns for the parameter values you passed.";
           this.alertType = "error";
           this.isAlert = true;
         } else {
+          
           const body = [
             ["GRN number", "PR number", "Created date", "Supplier"],
           ];
 
-          data.data.data2.forEach((element) => {
+          data.data2.forEach((element) => {
             const grn_no = {};
-            grn_no.text = element.Grn_master.id;
+            grn_no.text = element.grn_master.id;
 
             const created = {};
             created.text = this.moment(element.createdAt).format("YYYY-MM-DD");
 
             const supplier = {};
-            supplier.text = `${element.Grn_master.customer.title}. ${element.Grn_master.customer.first_name} ${element.Grn_master.customer.last_name}`;
+            supplier.text = element.grn_master.customer.fullName;
 
             const pr_no = {};
             pr_no.text = element.id;
@@ -175,11 +172,12 @@ export default {
             temp.push(supplier);
 
             body.push(temp);
-            data.data.data.customer = `${element.Grn_master.customer.title}. ${element.Grn_master.customer.first_name} ${element.Grn_master.customer.last_name}`;
+            data.data.customer = element.grn_master.customer.fullName;
           });
-          this.generatePDF(body, data.data.data);
+          this.generatePDF(body, data.data);
         }
       } catch (error) {
+        console.log(error)
         this.response =
           "There is no Sales returns for the parameter values you passed.";
         this.alertType = "error";
@@ -237,6 +235,7 @@ export default {
         }
         pdfMake.createPdf(dd).download();
       } catch (error) {
+        console.log(error)
         this.response =
           "There is no Sales returns for the parameter values you passed.";
         this.alertType = "error";

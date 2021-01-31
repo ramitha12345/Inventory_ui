@@ -125,10 +125,10 @@ export const Admin = [
         text: 'Stock report',
         path: '/stock-report',
       },
-      {
-        text: 'Daily transactions',
-        path: '/daily-transaction',
-      },
+      // {
+      //   text: 'Daily transactions',
+      //   path: '/daily-transaction',
+      // },
     ],
   },
 ];
