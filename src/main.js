@@ -6,17 +6,8 @@ import vuetify from './plugins/vuetify';
 import axios from 'axios';
 import Vuelidate from 'vuelidate';
 import Cookies from 'js-cookie';
-// import { AngularFontAwesomeModule } from 'angular-font-awesome';
-
-// @NgModule({
-//   //...
-//   imports: [
-//     //...
-//     AngularFontAwesomeModule
-//   ]
-//   //...
-// })
-// export class AppModule { }
+import moment from 'moment'
+Vue.prototype.moment = moment;
 
 Vue.prototype.$http = axios;
 axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
