@@ -52,6 +52,7 @@ import grn_report from '../components/reports/grn-report.vue';
 import pr_report from '../components/reports/pr-report.vue';
 import invoice_report from '../components/reports/invoice-report.vue';
 import sr_report from '../components/reports/sr-report.vue';
+import stockReport from '../components/reports/stock-report.vue'
 
 Vue.use(VueRouter);
 
@@ -218,6 +219,13 @@ const routes = [
     name: 'SR report',
     meta: { requiresAuth: true, tag: 'Reports' },
   },
+  {
+    path: '/stock-report',
+    component: stockReport,
+    name: 'Stock report',
+    meta: { requiresAuth: true, tag: 'Reports' },
+  },
+  
 ];
 
 const router = new VueRouter({

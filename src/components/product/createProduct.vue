@@ -4,9 +4,7 @@
       <v-form ref="productForm">
         <v-card>
           <v-card-title>
-            {{
-            `${isCreateComponent ? "Create Product" : "Update Product"}`
-            }}
+            {{ `${isCreateComponent ? "Create Product" : "Update Product"}` }}
           </v-card-title>
           <v-card-text>
             <v-row>
@@ -59,19 +57,44 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12" md="3">
-                <v-select :items="sizes" outlined v-model="size" label="Size"></v-select>
+                <v-select
+                  :items="sizes"
+                  outlined
+                  v-model="size"
+                  label="Size"
+                ></v-select>
+              </v-col>
+              <v-col cols="12" md="3">
+                <v-select
+                  :items="categories"
+                  outlined
+                  v-model="catID"
+                  item-text="name"
+                  item-value="id"
+                  label="Category"
+                ></v-select>
               </v-col>
             </v-row>
           </v-card-text>
           <v-card-actions>
-            <v-btn v-if="!isCreateComponent" class="warning" @click="PUT()">Update</v-btn>
-            <v-btn v-else class="success" @click="POST()" :disabled="$v.$invalid">Create</v-btn>
+            <v-btn v-if="!isCreateComponent" class="warning" @click="PUT()"
+              >Update</v-btn
+            >
+            <v-btn
+              v-else
+              class="success"
+              @click="POST()"
+              :disabled="$v.$invalid"
+              >Create</v-btn
+            >
           </v-card-actions>
         </v-card>
       </v-form>
     </v-col>
     <v-col>
-      <v-alert v-model="hasAlert" dismissible :type="alertType">{{alert}}</v-alert>
+      <v-alert v-model="hasAlert" dismissible :type="alertType">{{
+        alert
+      }}</v-alert>
     </v-col>
   </v-row>
 </template>
@@ -91,6 +114,7 @@ export default {
       qty: { required, integer },
       reorderLevel: { required, integer },
       size: { required },
+      catID:{required}
     };
   },
   computed: {
@@ -133,6 +157,7 @@ export default {
       this.GET(this.$route.query.id);
       this.id = this.$route.query.id;
     }
+    this.GET_CAT();
   },
   data() {
     return {
@@ -147,9 +172,19 @@ export default {
       alertType: "error",
       hasAlert: false,
       alert: "",
+      categories: [],
+      catID: "",
     };
   },
   methods: {
+    async GET_CAT() {
+      try {
+        const data = await this.$http.get("/category");
+        this.categories = data.data;
+      } catch (error) {
+        alert("error");
+      }
+    },
     async POST() {
       try {
         await this.$http.post("/product", {
@@ -159,6 +194,7 @@ export default {
           reorderLevel: this.reorderLevel,
           size: this.size,
           isImported: this.isImported,
+          catID:this.catID
         });
         this.$refs.productForm.reset();
         this.$v.$reset();
@@ -184,6 +220,7 @@ export default {
         this.reorderLevel = data.data.reorderLevel;
         this.size = data.data.size;
         this.isImported = data.data.isImported;
+        this.catID = data.data.catID;
         console.log(data.data);
       } catch (error) {
         alert("error");

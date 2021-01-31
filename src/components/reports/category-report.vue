@@ -157,67 +157,75 @@ export default {
         if (!data.data.data.length) {
           alert("Sorry no data for your parameters");
         } else {
-          this.generatePDF(body, data.data.meta_data);
+          this.generatePDF(body, data.data.masterData);
         }
       } catch (error) {
+      
         alert("Failed!");
       }
     },
     async generatePDF(body, meta_data) {
-      const dd = {
-        content: [
-          {
-            text: `Report generated date : ${this.moment().format(
-              "YYYY-MM-DD hh:mm A"
-            )}`,
-            alignment: "right",
-          },
-          {
-            text: "Category report",
-            alignment: "center",
-            style: "header",
-            margin: [0, 20],
-          },
-          {
-            table: {
-              widths: [50, "*", 100, 50],
-              body,
+      console.log('***',meta_data)
+      try {
+        const dd = {
+          content: [
+            {
+              text: `Report generated date : ${this.moment().format(
+                "YYYY-MM-DD hh:mm A"
+              )}`,
+              alignment: "right",
+            },
+            {
+              text: "Category report",
+              alignment: "center",
+              style: "header",
+              margin: [0, 20],
+            },
+            {
+              table: {
+                widths: [50, "*", 100, 50],
+                body,
+              },
+            },
+          ],
+          styles: {
+            header: {
+              fontSize: 18,
+              bold: true,
+            },
+            bigger: {
+              fontSize: 15,
+              italics: true,
+            },
+            title: {
+              bold: true,
             },
           },
-        ],
-        styles: {
-          header: {
-            fontSize: 18,
-            bold: true,
+          defaultStyle: {
+            columnGap: 20,
           },
-          bigger: {
-            fontSize: 15,
-            italics: true,
-          },
-          title: {
-            bold: true,
-          },
-        },
-        defaultStyle: {
-          columnGap: 20,
-        },
-      };
-      if (meta_data.status == 1) {
-        dd.content[1].text = dd.content[1].text.concat(
-          " for active categories"
-        );
+        };
+        if (meta_data.status == 1) {
+          dd.content[1].text = dd.content[1].text.concat(
+            " for active categories"
+          );
+        }
+        if (meta_data.status == 0) {
+          dd.content[1].text = dd.content[1].text.concat(
+            " for inactive categories"
+          );
+        }
+        if (meta_data.is_limit_by_range) {
+          dd.content[1].text = dd.content[1].text.concat(
+            ` categories created from : ${meta_data.from} to : ${meta_data.to}`
+          );
+        }
+        pdfMake.createPdf(dd).download();
+        
+      } catch (error) {
+         console.log(error)
+        
       }
-      if (meta_data.status == 0) {
-        dd.content[1].text = dd.content[1].text.concat(
-          " for inactive categories"
-        );
-      }
-      if (meta_data.is_limit_by_range) {
-        dd.content[1].text = dd.content[1].text.concat(
-          ` categories created from : ${meta_data.from} to : ${meta_data.to}`
-        );
-      }
-      pdfMake.createPdf(dd).download();
     },
   },
 };

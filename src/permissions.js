@@ -86,7 +86,7 @@ export const Admin = [
     'icon-alt': 'fa-angle-down',
     text: 'Report',
     children: [
-      { text: 'Reorder Level Report', path: '/report' },
+      // { text: 'Reorder Level Report', path: '/report' },
       {
         text: 'Staff report',
         path: '/staff_report',

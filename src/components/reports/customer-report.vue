@@ -212,7 +212,7 @@ export default {
           // s = "Inactive";
           dd.content[0].text = dd.content[0].text.concat(" status : Inactive");
         }
-        pdfMake.createPdf(dd).download();
+        pdfMake.createPdf(dd).download('customer-report.pdf');
       } catch (error) {
         console.log(error)
       }

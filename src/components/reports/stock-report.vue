@@ -2,9 +2,7 @@
   <v-layout row wrap>
     <v-flex>
       <v-card>
-        <v-card-title>
-          Stock report
-        </v-card-title>
+        <v-card-title>Stock report </v-card-title>
         <v-card-text>
           <v-text-field label="Search" v-model="search" filled></v-text-field>
 
@@ -17,9 +15,7 @@
           </v-data-table>
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="generatePdf">
-            get pdf
-          </v-btn>
+          <v-btn @click="generatePdf"> get pdf </v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
@@ -47,8 +43,8 @@ export default {
           value: "qty",
         },
         {
-          text: "Category",
-          value: "category",
+          text: "Reorder Level",
+          value: "reorderLevel",
         },
         // {
         //   text: 'Subcategory',
@@ -69,7 +65,7 @@ export default {
       }
     },
     async generatePdf() {
-      const body = [["Product", "Available qty", "Category"]];
+      const body = [["Product", "Available qty", "Reorder Level"]];
       this.items.forEach((element) => {
         const temp = [];
         const product = {};
@@ -77,7 +73,7 @@ export default {
         const qty = {};
         qty.text = `${element.qty}`;
         const category = {};
-        category.text = element.category;
+        category.text = element.reorderLevel;
 
         temp.push(product);
         temp.push(qty);
